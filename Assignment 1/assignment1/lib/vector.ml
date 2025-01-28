@@ -11,18 +11,23 @@ let create n x =
   if n < 1 then
     raise  DimensionError
   else
-    let rec aux n acc = 
+    let rec aux n acc= 
       if n = 0 then acc else aux (n-1) (x::acc)
     in
     aux n []
   ;;
 
-let dim v = 
-  let length = List.length v in
-  if length < 1 then
+let dim v =
+   
+  let rec length u acc = match u with
+  | [] -> acc
+  | _x::xs -> length xs (acc + 1)
+  in
+  let len = length v 0 in
+  if len < 1 then
     raise DimensionError
   else
-    length
+  len
   
   ;;
 
@@ -30,7 +35,13 @@ let is_zero v =
   if (dim v) < 1 then
     raise DimensionError
   else
-  List.for_all (fun x -> x = 0.0) v;;
+  let rec aux v = 
+    match v with
+    | [] -> true
+    | x::xs -> if x = 0.0 then aux xs else false
+  in
+  aux v;;
+  
 
 let unit n j =
   if n < 1 || j < 1 || j > n then
@@ -77,7 +88,7 @@ let inv v =
     raise DimensionError
   else 
   List.map (fun x -> -.x) v;;
-
+ 
 let length v = 
   if (dim v) < 1 then
     raise DimensionError
@@ -255,8 +266,67 @@ let angle v1 v2 =
         addv (scale b ([u1] :: u')) (scale b ([v1] :: v')) = addv (scale b u) (scale b v)
 
         Therefore, scale b (addv u v) = addv (scale b u) (scale b v) for all vectors u, v by induction on the length of the vectors u, v
-        
 
+
+
+    Other Properties:
+    1. Commutativity for dot product: u.v = v.u
+    2. -(u + v) = -u + -v
+    3. length of 2*(u) = 2*(length of u)
+    4. length of u = length of -u
+    5. angle between u and v = angle between v and u
+
+    1. Commutativity for dot product: u.v and v.u
+
+        To prove this, we need to prove dot_prod u v = dot_prod v u
+        Proof by induction on the length of the vector u (length of u = length of v)
+        Base case: length of u = 1 (u = [u1], v = [v1])
+            dot_prod u v = dot_prod [u1] [v1] = aux [u1] [v1] 0.0 // definition of dot_prod and aux
+            aux [u1] [v1] 0.0 = aux [] [] (u1 * v1) // definition of aux
+            aux [] [] (u1 * v1) = u1 * v1 = v1 * u1 = aux [] [] (v1 * u1) // commutativity of * operator over floats
+            aux [] [] (v1 * u1) = aux [v1] [u1] 0.0 = dot_prod [v1] [u1] // definition of aux
+            dot_prod [v1] [u1] = dot_prod v u // definition of dot_prod
+            
+        
+        Induction Hypothesis: Suppose dot_prod u v = dot_prod v u for all vectors u and v of length n
+        Induction Step: Let u = [u1] :: u' and v = [v1] :: v' where u' and v' are vectors of length n
+            dot_prod u v = aux u v 0.0 = aux ([u1] :: u') ([v1] :: v') 0.0 // definition of dot_prod and aux
+            aux ([u1] :: u') ([v1] :: v') 0.0 = aux u' v' (u1 * v1) // definition of aux
+            aux u' v' 0.0 = dot_prod u' v' // definition of dot_prod
+            dot_prod u' v' = dot_prod v' u' // Induction hypothesis
+            aux u' v' (u1 * v1) = u1 * v1 + aux u' v' 0.0 = u1 * v1 + dot_prod u' v' = u1 * v1 + dot_prod v' u' // definition of aux
+            u1 * v1 + dot_prod v' u' = v1 * u1 + aux v' u' 0.0 // commutativity of * operator over floats, definition of aux
+            v1 * u1 + aux v' u' 0.0 = aux ([v1] :: v') ([u1] :: u') 0.0 = dot_prod v u // definition of aux, dot_prod
+
+        Therefore, dot_prod u v = dot_prod v u for all vectors u and v by induction on the length of the vector u
+    2. -(u + v) = (-u) + (-v)
+
+          To prove this, we need to prove inv (addv u v) = addv (inv u) (inv v)
+          Proof by induction on the length of the vector u (length of u = length of v)
+          Base case: length of u = 1 (u = [u1], v = [v1])
+              inv (addv u v) = inv (addv [u1] [v1]) = inv [u1 + v1] // definition of addv
+              inv [u1 + v1] = [-1.0 * (u1 + v1)] = [-1.0 * u1 + -1.0 * v1] = [-1.0 * u1] + [-1.0 * v1] = addv [-1.0 * u1] [-1.0 * v1] = addv (inv [u1]) (inv [v1]) // definition of inv and addv
+          Induction hypothesis: Suppose inv (addv u v) = addv (inv u) (inv v) for all vectors u and v of length n
+          Induction Step: Let u = [u1] :: u' and v= [v1] :: v' where u' and v' are vectors of length n
+              inv (addv u v) = inv (addv ([u1] :: u') ([v1] :: v')) = inv ([u1 + v1] :: addv u' v') // definition of addv
+              inv ([u1 + v1] :: addv u' v') = [-1.0 * (u1 + v1)] :: inv (addv u' v') // definition of inv
+              [-1.0 * (u1 + v1)] :: inv (addv u' v') = [-1.0 * u1 + -1.0 * v1] :: inv (addv u' v') // distributivity of * operator over floats
+              [-1.0 * u1 + -1.0 * v1] :: inv (addv u' v') =  [-1.0 * u1 + -1.0 * v1] :: addv (inv u') (inv v') // Induction hypothesis
+              [-1.0 * u1 + -1.0 * v1] :: addv (inv u') (inv v') = addv ([(-1.0 * u1)] :: (inv u')) ([(-1.0 * v1)] :: (inv v')) // definition of addv
+              addv ([(-1.0 * u1)] :: (inv u')) ([(-1.0 * v1)] :: (inv v')) = addv (inv ([u1] :: u')) (inv ([v1]::v')) // definition of inv and addv
+              addv (inv ([u1] :: u')) (inv ([v1]::v')) = addv (inv u) (inv v) // definition of inv
+          Therefore, inv (addv u v) = addv (inv u) (inv v) for all vectors u and v by induction on the length of the vector u
+
+    3. length of b*(u) = b*(length of u)
+
+          To prove this, we need to prove length (scale b u) = b * (length u)
+          Proof by induction on the length of the vector u
+
+
+
+
+
+            
 
 
 
@@ -297,7 +367,7 @@ let testcase6_create = fun() ->
     let _ = create (-3) (-3.7) in false
   with
     |DimensionError -> true
-    |_-> false 
+    |_-> false
   ;;
 
 let testcase7_create = fun() -> create 3 (-3.7) = [-3.7; -3.7; -3.7];;

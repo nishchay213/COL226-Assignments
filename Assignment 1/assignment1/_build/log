@@ -14,20 +14,6 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_d2e547_output
-$ (cd _build/.sandbox/9930e3813192b4a0fa9c29c4db867e4b/default && .ppx\e5c62d576feb9cf4645d7d03ed58d831\ppx.exe --cookie "library-name=\"assignment1\"" -o lib/vector.pp.ml --impl lib/vector.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamldep.opt.exe -modules -impl lib/vector.pp.ml) > _build/default/lib/.assignment1.objs/assignment1__Vector.impl.d
-$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlopt.opt.exe -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I lib/.assignment1.objs/byte -I lib/.assignment1.objs/native -I C:\Users\patil\AppData\Local\opam\my_project\lib\parsexp -I C:\Users\patil\AppData\Local\opam\my_project\lib\ppx_sexp_conv\runtime-lib -I C:\Users\patil\AppData\Local\opam\my_project\lib\sexplib -I C:\Users\patil\AppData\Local\opam\my_project\lib\sexplib0 -intf-suffix .ml -no-alias-deps -opaque -open Assignment1 -o lib/.assignment1.objs/native/assignment1__Vector.cmx -c -impl lib/vector.pp.ml)
-$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlopt.opt.exe -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o lib/assignment1.cmxa lib/.assignment1.objs/native/assignment1.cmx lib/.assignment1.objs/native/assignment1__Vector.cmx lib/.assignment1.objs/native/assignment1__Quiz.cmx)
-$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlopt.opt.exe -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o test/test1.exe C:\Users\patil\AppData\Local\opam\my_project\lib\sexplib0\sexplib0.cmxa C:\Users\patil\AppData\Local\opam\my_project\lib\parsexp\parsexp.cmxa C:\Users\patil\AppData\Local\opam\my_project\lib\sexplib\sexplib.cmxa C:\Users\patil\AppData\Local\opam\my_project\lib\ppx_sexp_conv\runtime-lib/ppx_sexp_conv_lib.cmxa lib/assignment1.cmxa test/.test1.eobjs/native/dune__exe.cmx test/.test1.eobjs/native/dune__exe__Test1.cmx)
-$ (cd _build/default/test && .\test1.exe)
-> test_create passed
-> test_dim passed
-> test_is_zero passed
-> test_unit passed
-> test_scale passed
-> test_addv passed
-> test_dot_prod passed
-> test_inv passed
-> test_length passed
-> test_angle passed
+$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_6a9c6f_output
+$ (cd _build/default/test && .\test_assignment1.exe)
+> Finished

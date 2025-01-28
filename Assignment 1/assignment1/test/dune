@@ -2,6 +2,8 @@
 
 (test
  (name test_assignment1)
+ 
+(libraries assignment1 sexplib)
  )
 
 (test
