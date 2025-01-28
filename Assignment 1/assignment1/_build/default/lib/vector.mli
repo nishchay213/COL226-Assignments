@@ -1,5 +1,5 @@
 
-type vector = float list [@@ deriving sexp]
+type vector = float list
 val create : int -> float -> vector
 val dim : vector -> int
 val is_zero : vector -> bool

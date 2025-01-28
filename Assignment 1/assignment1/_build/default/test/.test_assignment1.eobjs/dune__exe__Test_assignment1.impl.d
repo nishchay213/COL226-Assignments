@@ -1,1 +1,1 @@
-test/test_assignment1.ml: Assignment1 Printf Sexplib
+test/test_assignment1.ml: Assignment1 Printf
