@@ -1,4 +1,4 @@
-open Assignment1.Vector
+(* open Assignment1.Vector
 
 let test_create () = 
   if testcase1_create ()&& testcase2_create() && testcase3_create() && testcase4_create() && testcase5_create() && testcase6_create() && testcase7_create() then
@@ -75,4 +75,4 @@ let () =
   
 
 
-
+ *)

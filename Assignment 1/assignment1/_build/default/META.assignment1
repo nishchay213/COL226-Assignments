@@ -1,0 +1,6 @@
+description = ""
+requires = "ppx_sexp_conv.runtime-lib sexplib sexplib0"
+archive(byte) = "assignment1.cma"
+archive(native) = "assignment1.cmxa"
+plugin(byte) = "assignment1.cma"
+plugin(native) = "assignment1.cmxs"

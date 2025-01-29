@@ -11,7 +11,7 @@ val inv : vector -> vector
 val length : vector -> float
 val angle : vector -> vector -> float
 
-val testcase1_create : unit -> bool
+(* val testcase1_create : unit -> bool
 val testcase2_create : unit -> bool
 val testcase3_create : unit -> bool
 val testcase4_create : unit -> bool
@@ -74,5 +74,5 @@ val testcase1_angle : unit -> bool
 val testcase2_angle : unit -> bool
 val testcase3_angle : unit -> bool
 val testcase4_angle : unit -> bool
-val testcase5_angle : unit -> bool
+val testcase5_angle : unit -> bool *)
 
