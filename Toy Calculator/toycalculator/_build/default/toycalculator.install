@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/toycalculator/META"
+  "_build/install/default/lib/toycalculator/dune-package"
+  "_build/install/default/lib/toycalculator/opam"
+]
+bin: [
+  "_build/install/default/bin/toycalculator.exe"
+]

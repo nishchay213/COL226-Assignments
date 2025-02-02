@@ -1,0 +1,20 @@
+# dune runtest
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location:
+# C:\Users\patil\AppData\Local\Microsoft\Windows\INetCache\dune\db
+# Workspace root: "D:\\COL226\\COL226-Assignments\\Toy
+# Calculator\\toycalculator"
+# Auto-detected concurrency: 12
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_e2fa71_output
+$ (cd _build/default/test && .\test_toycalculator.exe)
+> All tests passed

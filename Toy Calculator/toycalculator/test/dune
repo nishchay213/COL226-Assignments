@@ -1,0 +1,4 @@
+(test
+ (name test_toycalculator)
+ (libraries toycalculator)
+ )
