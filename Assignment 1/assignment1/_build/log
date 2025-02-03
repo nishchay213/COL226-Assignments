@@ -1,4 +1,4 @@
-# dune runtest
+# dune fmt
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location:
@@ -14,27 +14,72 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_2a44d1_output
-$ (cd _build/default/test && .\test_assignment1.exe)
-> Testing create...
-> test_create passed
-> Testing dim...
-> test_dim passed
-> Testing is_zero...
-> test_is_zero passed
-> Testing unit...
-> test_unit passed
-> Testing scale...
-> test_scale passed
-> Testing addv...
-> test_addv passed
-> Testing dot_prod...
-> test_dot_prod passed
-> Testing inv...
-> test_inv passed
-> Testing length...
-> test_length passed
-> Testing angle...
-> test_angle passed
-> Finished
-$ (cd _build/default/test && .\test1.exe)
+$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_40a779_output
+$ "C:\Program Files\Git\cmd\git.exe" --no-pager diff --no-index --color=always -u --ignore-cr-at-eol _build/default/lib/dune _build/default/lib/.formatted/dune
+> diff --git a/_build/default/lib/dune b/_build/default/lib/.formatted/dune
+> index 857ff2f..8567322 100644
+> --- a/_build/default/lib/dune
+> +++ b/_build/default/lib/.formatted/dune
+> @@ -1,11 +1,6 @@
+>  (library
+>   (name assignment1)
+>   (public_name assignment1)
+> - (preprocess (pps ppx_sexp_conv))
+> - (libraries sexplib)
+> - )
+> - 
+> -
+> -
+> -
+> -
+> + (preprocess
+> +  (pps ppx_sexp_conv))
+> + (libraries sexplib))
+> warning: in the working copy of 'Assignment 1/assignment1/_build/default/lib/dune', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'Assignment 1/assignment1/_build/default/lib/.formatted/dune', LF will be replaced by CRLF the next time Git touches it
+[1]
+$ "C:\Program Files\Git\cmd\git.exe" --no-pager diff --no-index --color=always -u --ignore-cr-at-eol _build/default/test/dune _build/default/test/.formatted/dune
+> diff --git a/_build/default/test/dune b/_build/default/test/.formatted/dune
+> index eb2ab6c..dc55cab 100644
+> --- a/_build/default/test/dune
+> +++ b/_build/default/test/.formatted/dune
+> @@ -1,13 +1,9 @@
+> -
+> -
+>  (test
+>   (name test_assignment1)
+> - 
+> -(libraries assignment1 sexplib)
+> - )
+> + (libraries assignment1 sexplib))
+>  
+>  (test
+> -(name test1)
+> -(preprocess (pps ppx_sexp_conv))
+> -(libraries assignment1 sexplib)
+> -)
+> + (name test1)
+> + (preprocess
+> +  (pps ppx_sexp_conv))
+> + (libraries assignment1 sexplib))
+> warning: in the working copy of 'Assignment 1/assignment1/_build/default/test/dune', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'Assignment 1/assignment1/_build/default/test/.formatted/dune', LF will be replaced by CRLF the next time Git touches it
+[1]
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl test/test1.ml) > _build/default/test/.formatted/test1.ml
+> File "test/test1.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\assignment1)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl lib/quiz.ml) > _build/default/lib/.formatted/quiz.ml
+> File "lib/quiz.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\assignment1)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl bin/main.ml) > _build/default/bin/.formatted/main.ml
+> File "bin/main.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\assignment1)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl lib/vector.ml) > _build/default/lib/.formatted/vector.ml
+> File "lib/vector.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\assignment1)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl test/test_assignment1.ml) > _build/default/test/.formatted/test_assignment1.ml
+> File "test/test_assignment1.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\assignment1)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --intf lib/vector.mli) > _build/default/lib/.formatted/vector.mli
+> File "lib/vector.mli", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\assignment1)

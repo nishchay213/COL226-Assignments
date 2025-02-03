@@ -1,0 +1,4 @@
+(executable
+ (public_name toycalculator)
+ (name main)
+ (libraries toycalculator))

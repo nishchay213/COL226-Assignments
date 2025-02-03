@@ -1,4 +1,4 @@
-# dune runtest
+# dune fmt
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location:
@@ -15,6 +15,30 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_e2fa71_output
-$ (cd _build/default/test && .\test_toycalculator.exe)
-> All tests passed
+$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_abf7f4_output
+$ "C:\Program Files\Git\cmd\git.exe" --no-pager diff --no-index --color=always -u --ignore-cr-at-eol _build/default/test/dune _build/default/test/.formatted/dune
+> diff --git a/_build/default/test/dune b/_build/default/test/.formatted/dune
+> index 5f9236b..5488a14 100644
+> --- a/_build/default/test/dune
+> +++ b/_build/default/test/.formatted/dune
+> @@ -1,4 +1,3 @@
+>  (test
+>   (name test_toycalculator)
+> - (libraries toycalculator)
+> - )
+> + (libraries toycalculator))
+> warning: in the working copy of 'Toy Calculator/toycalculator/_build/default/test/dune', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'Toy Calculator/toycalculator/_build/default/test/.formatted/dune', LF will be replaced by CRLF the next time Git touches it
+[1]
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl bin/main.ml) > _build/default/bin/.formatted/main.ml
+> File "bin/main.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\toycalculator)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl lib/toy.ml) > _build/default/lib/.formatted/toy.ml
+> File "lib/toy.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\toycalculator)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --intf lib/toy.mli) > _build/default/lib/.formatted/toy.mli
+> File "lib/toy.mli", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\toycalculator)
+$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl test/test_toycalculator.ml) > _build/default/test/.formatted/test_toycalculator.ml
+> File "test/test_toycalculator.ml", line 1:
+> Warning: Ocamlformat disabled because [--enable-outside-detected-project] is not set and no [.ocamlformat] was found within the project (root: ..\..\..\toycalculator)

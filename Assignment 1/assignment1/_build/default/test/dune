@@ -1,0 +1,13 @@
+
+
+(test
+ (name test_assignment1)
+ 
+(libraries assignment1 sexplib)
+ )
+
+(test
+(name test1)
+(preprocess (pps ppx_sexp_conv))
+(libraries assignment1 sexplib)
+)
