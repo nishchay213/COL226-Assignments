@@ -1,2 +1,4 @@
 (library
- (name assignment2))
+ (name assignment2)
+ (preprocess (pps ppx_inline_test)) 
+ )
