@@ -220,7 +220,10 @@ let rec help_eval (e : expr) =
       | _ -> raise TypeError)
   | UnitVector e1 -> (
       match help_eval e1 with
-      | V vec -> V (scale (1.0 /. length vec) vec)
+      | V vec ->
+          let len = length vec in
+          if Float.abs len < 1e-6 then raise TypeError
+          else V (scale (1.0 /. len) vec)
       | _ -> raise TypeError)
   | ZeroVector e1 -> (
       match help_eval e1 with
@@ -232,4 +235,6 @@ let rec help_eval (e : expr) =
       | V vec1, V vec2 -> V (addv vec1 (inv vec2))
       | _ -> raise TypeError)
 
-let eval (e : expr) = try help_eval e with _ -> raise (Wrong e)
+let eval (e : expr) =
+  let _ = type_of e in
+  try help_eval e with _ -> raise (Wrong e)

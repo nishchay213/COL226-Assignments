@@ -14,24 +14,57 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_f3988a_output
-$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl test/test_assignment2.ml) > _build/default/test/.formatted/test_assignment2.ml
+$ C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlc.opt.exe -config > C:\Users\patil\AppData\Local\Temp\dune_6c3df3_output
 $ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl lib/a2.ml) > _build/default/lib/.formatted/a2.ml
-$ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --intf lib/testcases.mli) > _build/default/lib/.formatted/testcases.mli
+$ "C:\Program Files\Git\cmd\git.exe" --no-pager diff --no-index --color=always -u --ignore-cr-at-eol _build/default/lib/a2.ml _build/default/lib/.formatted/a2.ml
+> diff --git a/_build/default/lib/a2.ml b/_build/default/lib/.formatted/a2.ml
+> index 00da85d..7b07dc1 100644
+> --- a/_build/default/lib/a2.ml
+> +++ b/_build/default/lib/.formatted/a2.ml
+> @@ -235,6 +235,6 @@ let rec help_eval (e : expr) =
+>        | V vec1, V vec2 -> V (addv vec1 (inv vec2))
+>        | _ -> raise TypeError)
+>  
+> -let eval (e : expr) = 
+> +let eval (e : expr) =
+>    let _ = type_of e in
+>    try help_eval e with _ -> raise (Wrong e)
+> warning: in the working copy of 'Assignment2/assignment2/_build/default/lib/a2.ml', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'Assignment2/assignment2/_build/default/lib/.formatted/a2.ml', LF will be replaced by CRLF the next time Git touches it
+[1]
 $ (cd _build/default && C:\Users\patil\AppData\Local\opam\my_project\bin\ocamlformat.exe --impl lib/testcases.ml) > _build/default/lib/.formatted/testcases.ml
 $ "C:\Program Files\Git\cmd\git.exe" --no-pager diff --no-index --color=always -u --ignore-cr-at-eol _build/default/lib/testcases.ml _build/default/lib/.formatted/testcases.ml
 > diff --git a/_build/default/lib/testcases.ml b/_build/default/lib/.formatted/testcases.ml
-> index 9961f27..04e9d43 100644
+> index 33d5643..f7e3696 100644
 > --- a/_build/default/lib/testcases.ml
 > +++ b/_build/default/lib/.formatted/testcases.ml
-> @@ -678,7 +678,6 @@ let%test "eval_test88" =
->      false
->    with
->    | Wrong e -> e = Angle (ConstV [ 1.; 2. ], ConstV [ 0.; 0. ])
-> -  | _ -> 
-> -    false
-> +  | _ -> false
+> @@ -739,12 +739,19 @@ let%test "eval_test99" =
+>    = V [ 4. /. sqrt 52.; 6. /. sqrt 52. ]
 >  
+>  let%test "eval_test100" =
+> -  try let _ = eval (ConstV []) in false
+> -with | Wrong e -> e = ConstV []
+> -| _ -> false
+> -
+> -let%test "eval_test101" = 
+> -try let _ = eval (Add (ConstV [], ConstV[])) in false
+> -with | Wrong e -> e = Add (ConstV [], ConstV [])
+> -| _ -> false
+> +  try
+> +    let _ = eval (ConstV []) in
+> +    false
+> +  with
+> +  | Wrong e -> e = ConstV []
+> +  | _ -> false
+> +
+> +let%test "eval_test101" =
+> +  try
+> +    let _ = eval (Add (ConstV [], ConstV [])) in
+> +    false
+> +  with
+> +  | Wrong e -> e = Add (ConstV [], ConstV [])
+> +  | _ -> false
+> +
 >  let fin () = print_endline "All tests passed"
 > warning: in the working copy of 'Assignment2/assignment2/_build/default/lib/testcases.ml', LF will be replaced by CRLF the next time Git touches it
 > warning: in the working copy of 'Assignment2/assignment2/_build/default/lib/.formatted/testcases.ml', LF will be replaced by CRLF the next time Git touches it

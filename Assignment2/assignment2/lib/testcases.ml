@@ -680,4 +680,78 @@ let%test "eval_test88" =
   | Wrong e -> e = Angle (ConstV [ 1.; 2. ], ConstV [ 0.; 0. ])
   | _ -> false
 
+let%test "eval_test89" =
+  try
+    let _ = eval (UnitVector (ConstV [ 0.; 0. ])) in
+    false
+  with
+  | Wrong e -> e = UnitVector (ConstV [ 0.; 0. ])
+  | _ -> false
+
+let%test "eval_test90" =
+  eval (Add (Sub (ConstS 5., ConstS 3.), Inv (ConstS 2.))) = S 0.
+
+let%test "eval_test91" =
+  eval (ScalProd (Add (ConstV [ 1.; 2. ], ConstV [ 3.; 4. ]), ConstS 2.))
+  = V [ 8.; 12. ]
+
+let%test "eval_test92" =
+  eval
+    (DotProd
+       ( Add (ConstV [ 1.; 2. ], ConstV [ 3.; 4. ]),
+         Sub (ConstV [ 5.; 6. ], ConstV [ 1.; 2. ]) ))
+  = S 40.
+
+let%test "eval_test93" =
+  eval
+    (Cond
+       ( IsZero (ConstS 0.),
+         Add (ConstS 1., ConstS 2.),
+         Sub (ConstS 5., ConstS 3.) ))
+  = S 3.
+
+let%test "eval_test94" =
+  eval (IsZero (Angle (ConstV [ 1.; 2. ], ConstV [ 2.; 4. ]))) = B true
+
+let%test "eval_test95" =
+  eval (Mag (Add (ConstV [ 1.; 2.; 3. ], Inv (ConstV [ 3.; 2.; 1. ]))))
+  = S (sqrt 8.)
+
+let%test "eval_test96" =
+  eval
+    (Cond
+       ( T,
+         DotProd (ConstV [ 1.; 2. ], ConstV [ 3.; 4. ]),
+         ScalProd (ConstS 3., ConstS 2.) ))
+  = S 11.
+
+let%test "eval_test97" =
+  eval
+    (Cond
+       (F, Angle (ConstV [ 1.; 2. ], ConstV [ 3.; 4. ]), Mag (ConstV [ 1.; 2. ])))
+  = S (sqrt 5.)
+
+let%test "eval_test98" =
+  eval (ZeroVector (Add (ConstV [ 1.; 2. ], ConstV [ 3.; 4. ]))) = V [ 0.; 0. ]
+
+let%test "eval_test99" =
+  eval (UnitVector (Add (ConstV [ 1.; 2. ], ConstV [ 3.; 4. ])))
+  = V [ 4. /. sqrt 52.; 6. /. sqrt 52. ]
+
+let%test "eval_test100" =
+  try
+    let _ = eval (ConstV []) in
+    false
+  with
+  | Wrong e -> e = ConstV []
+  | _ -> false
+
+let%test "eval_test101" =
+  try
+    let _ = eval (Add (ConstV [], ConstV [])) in
+    false
+  with
+  | Wrong e -> e = Add (ConstV [], ConstV [])
+  | _ -> false
+
 let fin () = print_endline "All tests passed"
