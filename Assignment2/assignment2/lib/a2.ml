@@ -22,7 +22,6 @@ type expr =
   | ZeroVector of expr
   | Sub of expr * expr
 
-
 exception Wrong of expr
 
 (* Though not used, this function was added for avoiding erros due to precision.*)
@@ -104,8 +103,7 @@ let angle (v1 : vector) (v2 : vector) =
   if len_v1 = 0.0 || len_v2 = 0.0 then raise DimensionError
   else acos (dot_prod v1 v2 /. (len_v1 *. len_v2))
 
-
-let rec help_type_of e =
+let rec help_type_of (e : expr) =
   match e with
   | T -> Bool
   | F -> Bool
@@ -143,7 +141,10 @@ let rec help_type_of e =
       | Vector n, Vector m when n = m -> Scalar
       | _ -> raise TypeError)
   | IsZero e1 -> (
-      match help_type_of e1 with Bool -> Bool | Scalar -> Bool | Vector _ -> Bool)
+      match help_type_of e1 with
+      | Bool -> Bool
+      | Scalar -> Bool
+      | Vector _ -> Bool)
   | Cond (e1, e2, e3) -> (
       match (help_type_of e1, help_type_of e2, help_type_of e3) with
       | Bool, Bool, Bool -> Bool
@@ -151,24 +152,18 @@ let rec help_type_of e =
       | Bool, Vector n, Vector m when n = m -> Vector n
       | _ -> raise TypeError)
   | UnitVector e1 -> (
-      match help_type_of e1 with
-      | Vector n -> Vector n
-      | _ -> raise TypeError)
+      match help_type_of e1 with Vector n -> Vector n | _ -> raise TypeError)
   | ZeroVector e1 -> (
-      match help_type_of e1 with
-      | Vector n -> Vector n
-      | _ -> raise TypeError)
+      match help_type_of e1 with Vector n -> Vector n | _ -> raise TypeError)
   | Sub (e1, e2) -> (
       match (help_type_of e1, help_type_of e2) with
       | Scalar, Scalar -> Scalar
       | Vector n, Vector m when n = m -> Vector n
       | _ -> raise TypeError)
 
+let type_of (e : expr) = try help_type_of e with _ -> raise (Wrong e)
 
-let type_of e =
-  try help_type_of e with _ -> raise (Wrong e)
-
-let rec help_eval e =
+let rec help_eval (e : expr) =
   match e with
   | T -> B true
   | F -> B false
@@ -219,7 +214,7 @@ let rec help_eval e =
       | S sca1 -> B (if Float.abs sca1 < 1e-6 then true else false)
       | V vec -> B (if is_zero vec then true else false))
   | Cond (e1, e2, e3) -> (
-      match help_eval e1 with 
+      match help_eval e1 with
       | B true when type_of e2 = type_of e3 -> help_eval e2
       | B false when type_of e2 = type_of e3 -> help_eval e3
       | _ -> raise TypeError)
@@ -237,7 +232,4 @@ let rec help_eval e =
       | V vec1, V vec2 -> V (addv vec1 (inv vec2))
       | _ -> raise TypeError)
 
-  
-
-let eval e =
-  try help_eval e with _ -> raise (Wrong e)
+let eval (e : expr) = try help_eval e with _ -> raise (Wrong e)

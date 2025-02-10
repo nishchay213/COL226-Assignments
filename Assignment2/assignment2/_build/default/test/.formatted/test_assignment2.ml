@@ -1,1 +1,3 @@
-(* open Assignment2.Vector *)
+open Assignment2.Testcases
+
+let () = fin ()
