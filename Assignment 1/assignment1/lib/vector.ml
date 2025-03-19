@@ -1,5 +1,4 @@
-open Sexplib.Std
-type vector = float list [@@deriving sexp]
+type vector = float list
 
 exception DimensionError
 

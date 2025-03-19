@@ -3,5 +3,8 @@
 (** @canonical Assignment1.Quiz *)
 module Quiz = Assignment1__Quiz
 
+(** @canonical Assignment1.Test_cases *)
+module Test_cases = Assignment1__Test_cases
+
 (** @canonical Assignment1.Vector *)
 module Vector = Assignment1__Vector
