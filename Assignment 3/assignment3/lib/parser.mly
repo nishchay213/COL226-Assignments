@@ -63,14 +63,17 @@ stmt_list:
   | stmt SEMICOLON           { [$1] }    (* Allow optional semicolon *)
 
 stmt:
-  | IDENTIFIER ASSIGN expr { Assign($1, $3) }
+  | IDENTIFIER ASSIGN expr { Reassign($1, $3) }
   | IDENTIFIER LBRACKET expr RBRACKET ASSIGN expr { Reassign_vector($1, $3, $6) }
   | IDENTIFIER LBRACKET expr RBRACKET LBRACKET expr RBRACKET ASSIGN expr { Reassign_matrix($1, $3, $6, $9) }
   | IF expr THEN stmt ELSE stmt { If($2, $4, $6) }
   | FOR IDENTIFIER ASSIGN expr TO expr DO stmt { For($2, $4, $6, $8) }
   | WHILE expr DO stmt { While($2, $4) }
   | PRINT_IDENTIFIER { PrintIdentifier($1 ) }
-  | INPUT_FILE LPAREN STRING RPAREN { InputFile($3) }
+  | TYPE IDENTIFIER ASSIGN INPUT_FILE { InputFile($1, $2, $4) }
+  | TYPE INT_CONST IDENTIFIER ASSIGN INPUT_FILE { InputFile_Vec($1, $2, $3, $5) }
+  | TYPE INT_CONST INT_CONST IDENTIFIER ASSIGN INPUT_FILE { InputFile_Mat($1, $2, $3, $4, $6) }
+  | TYPE IDENTIFIER ASSIGN expr { Assign($1, $2, $4) }
   | TYPE IDENTIFIER ASSIGN INPUT{ Input ($1, $2) }
   | TYPE INT_CONST IDENTIFIER ASSIGN INPUT { Input_Vec ($1, $2, $3) }
   | TYPE INT_CONST INT_CONST  IDENTIFIER ASSIGN INPUT { Input_Mat ($1, $2, $3, $4) }

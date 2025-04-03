@@ -1,35 +1,60 @@
 a)
-a := 5 + 3 * 2;  // a = 11
-b := (10 - 2) / 4; // b = 2
-c := 2^3; // c = 8 (Exponentiation)
-d := 17 % 5; // d = 2 (Modulus)
+int a := 5 + 3 * 2;  // a = 11
+int b := (10 - 2) / 4; // b = 2
+float c := 2^3; // c = 8 (Exponentiation)
+int d := 17 % 5; // d = 2 (Modulus)
+Print(a);
+Print(b);
+Print(c);
+Print(d);
 
 b)
-x := T && F; // x = false
-y := T || F; // y = true
-z := !T; // z = false
+bool x := T && F; // x = false
+bool y := T || F; // y = true
+bool z := !T; // z = false
+Print(x);
+Print(y);
+Print(z);
 
 c)
-v1 := 3 [1, 2, 3];
-v2 := 3 [4, 5, 6];
-sum := v1 +v v2;  // [5, 7, 9]
-dot_product := v1 .v v2;  // 1*4 + 2*5 + 3*6 = 32
-cross_product := v1 cross_v v2; // [-3, 6, -3]
-scaled := 3 scal_v v1;  // [3, 6, 9]
-anglevec := v1 angle_v v2 ; // Computes angle between v1 and v2
-normalized := norm_v v1; // Normalized vector
-magnitude := mag_v v1; // ||v1||
+vec_int v1 := 3 [1, 2, 3];
+vec_int v2 := 3 [4, 5, 6];
+vec_int sum := v1 +v v2;  // [5, 7, 9]
+int dot_product := v1 .v v2;  // 1*4 + 2*5 + 3*6 = 32
+vec_int cross_product := v1 cross_v v2; // [-3, 6, -3]
+vec_int scaled := 3 scal_v v1;  // [3, 6, 9]
+float anglevec := v1 angle_v v2 ; // Computes angle between v1 and v2
+vec_int normalized := norm_v v1; // Normalized vector
+float magnitude := mag_v v1; // ||v1||
+Print(v1);
+Print(v2);
+Print(sum);
+Print(dot_product);
+Print(cross_product);
+Print(scaled);
+Print(anglevec);
+Print(normalised);
+
 
 d)
-m1 := 2 2 [[1, 2], [3, 4]];
-m2 := 2 2 [[5, 6], [7, 8]];
-sum := m1 +m m2;  // [[6, 8], [10, 12]]
-scaled := 2 scal_m m1;  // [[2, 4], [6, 8]]
-product := m1 *m m2;  // Matrix multiplication
-determinant := det_m m1; // -2
-transpose := tr m1; // [[1, 3], [2, 4]]
-inverse := inv_m m1; // [[-2, 1], [1.5, -0.5]]
-trace_m1 := trace m1; // 1 + 4 = 5
+mat_int m1 := 2 2 [[1, 2], [3, 4]];
+mat_int m2 := 2 2 [[5, 6], [7, 8]];
+mat_int sum := m1 +m m2;  // [[6, 8], [10, 12]]
+mat_int scaled := 2 scal_m m1;  // [[2, 4], [6, 8]]
+mat_int product := m1 *m m2;  // Matrix multiplication
+int determinant := det_m m1; // -2
+mat_int transpose := tr m1; // [[1, 3], [2, 4]]
+mat_int inverse := inv_m m1; // [[-2, 1], [1.5, -0.5]]
+int trace_m1 := trace m1; // 1 + 4 = 5
+Print(m1);
+Print(m2);
+Print(sum);
+Print(scaled);
+Print(product);
+Print(determinant);
+Print(transpose);
+Print(inverse);
+Print(trace_m1);
 
 e)
 int x := Input();
@@ -41,28 +66,29 @@ if (x > y) then {
 };
 
 f)
-i := 0;
+int i := 0;
 while (i < 10) do {
     Print(i);
     i := i + 1;
 };
 
 g)
-A := 3 3 [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-B := 3 3 [[9, 8, 7], [6, 5, 4], [3, 2, 1]];
-C := 3 3 [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-for i := 0 to 2 do {
-	for j := 0 to 2 do {
-		for k := 0 to 2 do {
+mat_int A := 3 3 [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+mat_int B := 3 3 [[9, 8, 7], [6, 5, 4], [3, 2, 1]];
+mat_int C := 3 3 [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+for i := 0 to 3 do {
+	for j := 0 to 3 do {
+		for k := 0 to 3 do {
 			C[i][j] := C[i][j] + A[i][k] * B[k][j];
 		};
 	};
 };
+Print(C);
 
 h)
-x := 5;
-y := 10;
-z := 15;
+int x := 5;
+int y := 10;
+int z := 15;
 if (x > y) then {
 	if (x > z) then {
 		raise xISgreater;
@@ -93,26 +119,52 @@ Print(v3);
 
 // type errors
 k)
-A := 5;
-B := 6.2;
-C := A + B; // Here type error will occur
+int A := 5;
+float B := 6.2;
+float C := A + B; // Here type error will occur
 
 l)
-A := 3 [4, 5, 6];
-B := 3 [8, 9.0, 10]; //this will not parse
+vec_int A := 3 [4, 5, 6];
+vec_int B := 3 [8, 9.0, 10]; //this will not parse
 
 m)
-A := 3 [4, 5, 6];
-B := 4 [8, 9, 10, 15];
-C := A +v B; //Type Error as dim different
+vec_int A := 3 [4, 5, 6];
+vec_int B := 4 [8, 9, 10, 15];
+vec_int C := A +v B; //Type Error as dim different
 
 n)
-A := 3 [4, 7, 8];
-B := A[2];
+vec_int A := 3 [4, 7, 8];
+int B := A[2];
 Print(B);
 
 o)
-A := 2 2 [[4,8], [5,6]];
-B := 2 [5,9];
-C := A *mv B;
-D := B +v C;
+mat_int A := 2 2 [[4,8], [5,6]];
+vec_int B := 2 [5,9];
+vec_int C := A *mv B;
+vec_int D := B +v C;
+Print(C);
+Print(D);
+
+p)
+mat_float 3 3 A := Input(abc.txt);
+mat_float inv_A := inv_m A;
+Print(inv_A); // Here if matrix is singular, runtime error occurs
+
+q)
+mat_int 3 3 A := Input(abc.txt);
+
+int count := 0;
+
+for i:=0 to 3 do {
+    for j:=0 to 3 do {
+        if(A[i][j] = 0) then {
+            count := count + 1;
+        } else {
+            count := count;
+        };
+    };
+};
+
+Print(count);
+
+r)
