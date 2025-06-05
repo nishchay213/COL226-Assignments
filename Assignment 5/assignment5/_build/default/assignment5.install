@@ -1,0 +1,22 @@
+lib: [
+  "_build/install/default/lib/assignment5/META"
+  "_build/install/default/lib/assignment5/assignment5.a"
+  "_build/install/default/lib/assignment5/assignment5.cma"
+  "_build/install/default/lib/assignment5/assignment5.cmi"
+  "_build/install/default/lib/assignment5/assignment5.cmt"
+  "_build/install/default/lib/assignment5/assignment5.cmx"
+  "_build/install/default/lib/assignment5/assignment5.cmxa"
+  "_build/install/default/lib/assignment5/assignment5.ml"
+  "_build/install/default/lib/assignment5/assignment5__Subsandunif.cmi"
+  "_build/install/default/lib/assignment5/assignment5__Subsandunif.cmt"
+  "_build/install/default/lib/assignment5/assignment5__Subsandunif.cmx"
+  "_build/install/default/lib/assignment5/dune-package"
+  "_build/install/default/lib/assignment5/opam"
+  "_build/install/default/lib/assignment5/subsandunif.ml"
+]
+libexec: [
+  "_build/install/default/lib/assignment5/assignment5.cmxs"
+]
+bin: [
+  "_build/install/default/bin/assignment5.exe"
+]

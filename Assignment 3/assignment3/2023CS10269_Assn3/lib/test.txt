@@ -1,0 +1,118 @@
+open Assignment3.Lexer
+open Assignment3.Parser
+
+let string_of_token tok = 
+  match tok with
+  | IDENTIFIER id -> "IDENTIFIER(" ^ id ^ ")"
+  | INT_CONST i -> "INT_CONST(" ^ string_of_int i ^ ")"
+  | FLOAT_CONST f -> "FLOAT_CONST(" ^ string_of_float f ^ ")"
+  | STRING s -> "STRING(" ^ s ^ ")"
+  | BOOL_CONST b -> "BOOL_CONST(" ^ string_of_bool b ^ ")"
+  | TO -> "TO"
+  | DO -> "DO"
+  | PRINT_IDENTIFIER id -> "PRINT_IDENTIFIER(" ^ id ^ ")"
+  | INPUT_FILE file -> "INPUT_FILE(" ^ file ^ ")"
+  | PLUS -> "PLUS"
+  | MINUS -> "MINUS"
+  | TIMES -> "TIMES"
+  | DIV -> "DIV"
+  | MODULO -> "MODULO"
+  | PLUS_FLOAT -> "PLUS_FLOAT"
+  | MINUS_FLOAT -> "MINUS_FLOAT"
+  | TIMES_FLOAT -> "TIMES_FLOAT"
+  | DIV_FLOAT -> "DIV_FLOAT"
+  | EQUAL -> "EQUAL"
+  | NOT_EQUAL -> "NOT_EQUAL"
+  | LESS -> "LESS"
+  | GREATER -> "GREATER"
+  | LESS_EQUAL -> "LESS_EQUAL"
+  | GREATER_EQUAL -> "GREATER_EQUAL"
+  | AND -> "AND"
+  | OR -> "OR"
+  | NOT -> "NOT"
+  | VECTOR_ADD -> "VECTOR_ADD"
+  | VECTOR_DOT -> "VECTOR_DOT"
+  | VECTOR_CROSS -> "VECTOR_CROSS"
+  | VECTOR_MAG -> "VECTOR_MAG"
+  | EOF -> "EOF"
+  | ASSIGN -> "ASSIGN"
+  | SEMICOLON -> "SEMICOLON"
+  | COMMA -> "COMMA"
+  | IF -> "IF"
+  | THEN -> "THEN"
+  | ELSE -> "ELSE"
+  | FOR -> "FOR"
+  | WHILE -> "WHILE"
+  | LPAREN -> "LPAREN"
+  | RPAREN -> "RPAREN"
+  | LBRACKET -> "LBRACKET"
+  | RBRACKET -> "RBRACKET"
+  | LBRACE -> "LBRACE"
+  | RBRACE -> "RBRACE"
+  | _ -> "UNKNOWN"
+
+
+let lexbuf = Lexing.from_channel stdin ;;
+let rec print_tokens () =
+  let token = token lexbuf in
+  Printf.printf "Token: %s\n" (string_of_token token); (* Define string_of_token *)
+  flush stdout;
+  if token <> EOF then print_tokens () ;;
+print_tokens ()
+
+
+
+
+(* main.ml *)
+open Assignment3
+
+let main () =
+  let lexbuf = Lexing.from_channel stdin in
+  try
+    let ast = Parser.program Lexer.token lexbuf in
+    Printf.printf "Parsed AST:\n%s\n" (Ast.string_of_program ast)
+  with
+  | Lexer.Eof -> print_endline "Error: Unexpected end of input."
+  | exn -> Printf.printf "Error: %s\n" (Printexc.to_string exn)
+
+let () = main ()
+
+
+(* main.ml *)
+
+open Assignment3
+let main () =
+  let input = "" in
+  let lexbuf = Lexing.from_string input in
+  try
+    let ast = Parser.program Lexer.token lexbuf in
+    Printf.printf "Parsed AST:\n%s\n" (Ast.string_of_program ast)
+  with
+  | Lexer.Eof -> print_endline "Error: Unexpected end of input."
+  | exn -> Printf.printf "Error: %s\n" (Printexc.to_string exn)
+
+let () = main ()
+
+
+open Assignment3
+
+let string_of_program prog =
+    try
+      (* Perform type checking on the program *)
+      let _ = Type_checker.type_program prog in
+      (* If type checking passes, convert the program to a string *)
+      "Program([" ^ String.concat ";\n" (List.map Ast.string_of_statement prog) ^ "])"
+    with
+    | Type_checker.TypeError ->
+        "TypeError"
+
+let main () =
+  let lexbuf = Lexing.from_channel stdin in
+  try
+    let ast = Parser.program Lexer.token lexbuf in
+    Printf.printf "Parsed AST:\n%s\n" (string_of_program ast)
+  with
+  | Lexer.Eof -> print_endline "Error: Unexpected end of input."
+  | exn -> Printf.printf "Error: %s\n" (Printexc.to_string exn)
+
+let () = main ()

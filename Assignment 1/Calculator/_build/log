@@ -1,0 +1,7 @@
+# dune init proj Toy Calculator
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location:
+# C:\Users\patil\AppData\Local\Microsoft\Windows\INetCache\dune\db
+# Workspace root: "D:\\COL226\\COL226-Assignments\\Assignment 1\\Calculator"
+# Auto-detected concurrency: 12

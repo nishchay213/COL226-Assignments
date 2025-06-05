@@ -1,0 +1,44 @@
+(lang dune 3.17)
+(name assignment5)
+(sections (lib .) (libexec .) (bin ../../bin))
+(files
+ (lib
+  (META
+   assignment5.a
+   assignment5.cma
+   assignment5.cmi
+   assignment5.cmt
+   assignment5.cmx
+   assignment5.cmxa
+   assignment5.ml
+   assignment5__Subsandunif.cmi
+   assignment5__Subsandunif.cmt
+   assignment5__Subsandunif.cmx
+   dune-package
+   opam
+   subsandunif.ml))
+ (libexec (assignment5.cmxs))
+ (bin (assignment5.exe)))
+(library
+ (name assignment5)
+ (kind normal)
+ (archives (byte assignment5.cma) (native assignment5.cmxa))
+ (plugins (byte assignment5.cma) (native assignment5.cmxs))
+ (native_archives assignment5.a)
+ (main_module_name Assignment5)
+ (modes byte native)
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name assignment5)
+     (visibility public)
+     (kind alias)
+     (source (path Assignment5) (impl (path assignment5.ml-gen))))
+    (name Assignment5)
+    (modules
+     (module
+      (obj_name assignment5__Subsandunif)
+      (visibility public)
+      (source (path Subsandunif) (impl (path subsandunif.ml))))))
+   (wrapped true))))

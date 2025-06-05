@@ -1,0 +1,103 @@
+1)
+mat_float 6 6 A := Input(tc1A.txt);
+vec_float 6 B := Input(tc1B.txt);
+
+mat_float A_T := tr A;
+mat_float A_TA := A_T *m A;
+
+if ((det_m A_TA) != 0.0) then {
+   mat_float A_TA_inv := inv_m A_TA;
+    vec_float A_TB := A_T *mv B;
+    vec_float theta := A_TA_inv *mv A_TB;
+    Print(theta);
+}
+else{
+    raise MatrixNotinvertible;
+};
+
+2)
+mat_float 4 5 A := Input(tc2A.txt);
+mat_float 4 5 B := Input(tc2B.txt);
+mat_float 5 4 D := Input(tc2D.txt);
+vec_float 4 u := Input(tc2u.txt);
+
+mat_float C := A +m B;
+mat_float E := C *m D;
+
+if ((det_m E) != 0.0) then{
+    mat_float E_inverse := inv_m E;
+    vec_float x := E_inverse *mv u;
+
+    Print(x);
+}
+else{
+    raise MatrixNotInvertible;
+};
+
+3)
+vec_float 4 v := Input(tc3v.txt);
+float sum_result := 0.0;
+for i:=0 to (dim_v v) do{
+    sum_result := sum_result + v[i];
+};
+float ans := 2.5 * sum_result;
+Print(ans);
+
+4)
+mat_float 4 5 A := Input(tc4A.txt);
+float threshold := 1e-3;
+float sum_of_squares := 0.0;
+for i:=0 to (rows_m A) do{
+    for j:=0 to (cols_m A) do{
+        sum_of_squares := (A[i][j] * A[i][j]) + sum_of_squares; 
+    };   
+};
+float norm := sqrt sum_of_squares;
+while norm > threshold do{
+    for i:=0 to (rows_m A) do{
+        for j:=0 to (cols_m A) do{
+            A[i, j] := A[i, j] * 0.5;
+        };
+    };
+    sum_of_squares := 0.0;
+    for i:=0 to (rows_m A) do{
+    for j:=0 to (cols_m A) do{
+        sum_of_squares := (A[i][j] * A[i][j]) + sum_of_squares; 
+    };   
+};
+float norm := sqrt sum_of_squares;
+};
+Print(A);
+
+5)
+mat_float 3 2 A := Input(tc5A.txt);
+mat_float 2 3 B := Input(tc5B.txt);
+
+mat_float C := A +m B;
+Print(C);
+
+6)
+mat_float 3 4 A := Input(tc6A.txt);
+mat_float 5 2 B := Input(tc6B.txt);
+
+
+mat_float C := A *m B;
+Print(C);
+
+7)
+mat_float 3 3 A := Input(tc7A.txt);
+vec_float 3 B := Input(tc7B.txt);
+
+mat_float C := A +m B;
+Print(C);
+
+8)
+mat_float 2 2 A := Input(tc8A.txt);
+if (det_m A) != 0.0 then{
+    mat_float A_inv := inv_m A;
+    Print(A_inv);
+}
+else{
+    raise MatrixNotInvertible;
+};
+

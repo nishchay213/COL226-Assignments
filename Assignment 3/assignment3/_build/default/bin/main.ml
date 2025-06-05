@@ -8,7 +8,8 @@ let string_of_program prog =
       ""
     with
     | Type_checker.TypeError msg ->
-        msg
+        Printf.printf "Type error: %s\n" msg;
+        exit 1
     
 
 let main () =

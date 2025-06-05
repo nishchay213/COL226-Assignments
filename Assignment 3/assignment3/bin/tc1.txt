@@ -1,1 +1,5 @@
-raise HelloWorld;
+mat_float 2 2 A := Input(tc8A.txt;
+
+mat_float A_inv := inv_m C;
+Print(A_inv);
+
